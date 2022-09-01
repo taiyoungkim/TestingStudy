@@ -10,8 +10,9 @@ import com.androiddevs.shoppinglisttestingyt.data.remote.responses.ImageResponse
 import com.androiddevs.shoppinglisttestingyt.other.Constants
 import com.androiddevs.shoppinglisttestingyt.other.Event
 import com.androiddevs.shoppinglisttestingyt.other.Resource
-import com.androiddevs.shoppinglisttestingyt.repository.ShoppingRepository
+import com.androiddevs.shoppinglisttestingyt.repositories.ShoppingRepository
 import kotlinx.coroutines.launch
+import kotlin.Exception
 
 class ShoppingViewModel @ViewModelInject constructor(
     private val repository: ShoppingRepository
@@ -49,18 +50,18 @@ class ShoppingViewModel @ViewModelInject constructor(
         }
         if(name.length > Constants.MAX_NAME_LENGTH) {
             _insertShoppingItemStatus.postValue(Event(Resource.error("The name of the item" +
-                    " must not exceed ${Constants.MAX_NAME_LENGTH} characters", null)))
+                    "must not exceed ${Constants.MAX_NAME_LENGTH} characters", null)))
             return
         }
         if(priceString.length > Constants.MAX_PRICE_LENGTH) {
             _insertShoppingItemStatus.postValue(Event(Resource.error("The price of the item" +
-                    " must not exceed ${Constants.MAX_PRICE_LENGTH} characters", null)))
+                    "must not exceed ${Constants.MAX_PRICE_LENGTH} characters", null)))
             return
         }
         val amount = try {
             amountString.toInt()
-        } catch (e: Exception) {
-            _insertShoppingItemStatus.postValue(Event(Resource.error("Pleas enter a valid amount", null)))
+        } catch(e: Exception) {
+            _insertShoppingItemStatus.postValue(Event(Resource.error("Please enter a valid amount", null)))
             return
         }
         val shoppingItem = ShoppingItem(name, amount, priceString.toFloat(), _curImageUrl.value ?: "")
@@ -80,3 +81,16 @@ class ShoppingViewModel @ViewModelInject constructor(
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

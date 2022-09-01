@@ -1,4 +1,4 @@
-package com.androiddevs.shoppinglisttestingyt.repository
+package com.androiddevs.shoppinglisttestingyt.repositories
 
 import androidx.lifecycle.LiveData
 import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingItem

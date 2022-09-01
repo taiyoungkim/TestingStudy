@@ -22,7 +22,6 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @ExperimentalCoroutinesApi
-//@RunWith(AndroidJUnit4::class)
 @SmallTest
 @HiltAndroidTest
 class ShoppingDaoTest {
@@ -40,10 +39,6 @@ class ShoppingDaoTest {
 
     @Before
     fun setup() {
-//        database = Room.inMemoryDatabaseBuilder(
-//            ApplicationProvider.getApplicationContext(),
-//            ShoppingItemDatabase::class.java
-//        ).allowMainThreadQueries().build()
         hiltRule.inject()
         dao = database.shoppingDao()
     }
@@ -54,14 +49,8 @@ class ShoppingDaoTest {
     }
 
     @Test
-    fun testLaunchFragmentInHiltContainer() {
-        launchFragmentInHiltContainer<ShoppingFragment> {
-
-        }
-    }
-
-    @Test
     fun insertShoppingItem() = runBlockingTest {
+
         val shoppingItem = ShoppingItem("name", 1, 1f, "url", id = 1)
         dao.insertShoppingItem(shoppingItem)
 
@@ -86,7 +75,6 @@ class ShoppingDaoTest {
         val shoppingItem1 = ShoppingItem("name", 2, 10f, "url", id = 1)
         val shoppingItem2 = ShoppingItem("name", 4, 5.5f, "url", id = 2)
         val shoppingItem3 = ShoppingItem("name", 0, 100f, "url", id = 3)
-
         dao.insertShoppingItem(shoppingItem1)
         dao.insertShoppingItem(shoppingItem2)
         dao.insertShoppingItem(shoppingItem3)
@@ -96,3 +84,16 @@ class ShoppingDaoTest {
         assertThat(totalPriceSum).isEqualTo(2 * 10f + 4 * 5.5f)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

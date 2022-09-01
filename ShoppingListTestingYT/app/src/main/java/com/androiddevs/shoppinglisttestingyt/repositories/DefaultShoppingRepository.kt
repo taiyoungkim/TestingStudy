@@ -1,4 +1,4 @@
-package com.androiddevs.shoppinglisttestingyt.repository
+package com.androiddevs.shoppinglisttestingyt.repositories
 
 import androidx.lifecycle.LiveData
 import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingDao
@@ -13,6 +13,7 @@ class DefaultShoppingRepository @Inject constructor(
     private val shoppingDao: ShoppingDao,
     private val pixabayAPI: PixabayAPI
 ) : ShoppingRepository {
+
     override suspend fun insertShoppingItem(shoppingItem: ShoppingItem) {
         shoppingDao.insertShoppingItem(shoppingItem)
     }
@@ -32,15 +33,29 @@ class DefaultShoppingRepository @Inject constructor(
     override suspend fun searchForImage(imageQuery: String): Resource<ImageResponse> {
         return try {
             val response = pixabayAPI.searchForImage(imageQuery)
-            if (response.isSuccessful) {
+            if(response.isSuccessful) {
                 response.body()?.let {
                     return@let Resource.success(it)
-                } ?: Resource.error("An unkown error occured", null)
+                } ?: Resource.error("An unknown error occured", null)
             } else {
-                Resource.error("An unkown error occured", null)
+                Resource.error("An unknown error occured", null)
             }
-        } catch (e: Exception) {
+        } catch(e: Exception) {
             Resource.error("Couldn't reach the server. Check your internet connection", null)
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

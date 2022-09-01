@@ -1,4 +1,4 @@
-package com.androiddevs.shoppinglisttestingyt.repository
+package com.androiddevs.shoppinglisttestingyt.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,12 +6,12 @@ import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingItem
 import com.androiddevs.shoppinglisttestingyt.data.remote.responses.ImageResponse
 import com.androiddevs.shoppinglisttestingyt.other.Resource
 
-class FakeShoppingRepository : ShoppingRepository {
+class FakeShoppingRepositoryAndroidTest : ShoppingRepository {
 
     private val shoppingItems = mutableListOf<ShoppingItem>()
 
     private val observableShoppingItems = MutableLiveData<List<ShoppingItem>>(shoppingItems)
-    private val observaleTotalPrice = MutableLiveData<Float>()
+    private val observableTotalPrice = MutableLiveData<Float>()
 
     private var shouldReturnNetworkError = false
 
@@ -21,7 +21,7 @@ class FakeShoppingRepository : ShoppingRepository {
 
     private fun refreshLiveData() {
         observableShoppingItems.postValue(shoppingItems)
-        observaleTotalPrice.postValue(getTotalPrice())
+        observableTotalPrice.postValue(getTotalPrice())
     }
 
     private fun getTotalPrice(): Float {
@@ -43,7 +43,7 @@ class FakeShoppingRepository : ShoppingRepository {
     }
 
     override fun observeTotalPrice(): LiveData<Float> {
-        return observaleTotalPrice
+        return observableTotalPrice
     }
 
     override suspend fun searchForImage(imageQuery: String): Resource<ImageResponse> {
@@ -54,3 +54,14 @@ class FakeShoppingRepository : ShoppingRepository {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
